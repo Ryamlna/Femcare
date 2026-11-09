@@ -1,0 +1,24 @@
+# Dependensi
+node_modules/
+
+# Build output
+dist/
+.vite/
+
+# Rahasia dan konfigurasi lokal
+.env
+.env.*
+!.env.example
+
+# Log
+*.log
+npm-debug.log*
+
+# Vercel
+.vercel/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

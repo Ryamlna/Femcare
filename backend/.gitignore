@@ -1,0 +1,21 @@
+node_modules/
+
+# Rahasia dan konfigurasi lokal (jangan pernah di-commit)
+.env
+.env.*
+!.env.example
+client_secret*.json
+
+# Log
+*.log
+npm-debug.log*
+
+# Build / cache
+dist/
+.cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
