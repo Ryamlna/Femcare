@@ -38,5 +38,9 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
 });
 
-const port = process.env.PORT || 4000;
-app.listen(port, () => console.log(`FemCare API berjalan di http://localhost:${port}`));
+if (!process.env.VERCEL) {
+  const port = process.env.PORT || 4000;
+  app.listen(port, () => console.log(`FemCare API berjalan di http://localhost:${port}`));
+}
+
+export default app;
