@@ -1,6 +1,6 @@
-   {
-     "rewrites": [
-       { "source": "/api/:path*", "destination": "https://femcare-two.vercel.app/api/health:path*" },
-       { "source": "/(.*)", "destination": "/index.html" }
-     ]
-   }
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://femcare-two.vercel.app/api/health:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
