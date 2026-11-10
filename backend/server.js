@@ -31,7 +31,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/cycles', cycleRoutes);
 app.use('/api/logs', logRoutes);
 
-app.use((req, res) => res.status(404).json({ error: 'Endpoint tidak ditemukan.' }));
+app.use((req, res) =>
+  res.status(404).json({ error: 'Endpoint tidak ditemukan.', method: req.method, originalUrl: req.originalUrl, url: req.url }));
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
   console.error(err);
