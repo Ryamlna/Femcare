@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { HeartPulse, LineChart, ShieldCheck, Stethoscope } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
+import Mascot from '../components/Mascot.jsx';
 
 const points = [
   { icon: LineChart, text: 'Lihat pola nyeri, suasana hati, dan tidur dalam satu layar.' },
@@ -23,7 +24,7 @@ export default function Login() {
   };
 
   return (
-    <div className="mx-auto grid min-h-screen max-w-6xl items-center gap-12 px-6 py-12 lg:grid-cols-[1.15fr_0.85fr]">
+    <div className="mx-auto grid min-h-screen max-w-6xl items-center gap-10 px-6 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
       <section>
         <div className="mb-8 flex items-center gap-2.5">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-sunset-gradient"><HeartPulse size={20} aria-hidden /></span>
@@ -45,17 +46,21 @@ export default function Login() {
         </ul>
       </section>
 
-      <section className="glass rounded-3xl p-8 sm:p-10" aria-labelledby="login-title">
-        <h2 id="login-title" className="font-display text-2xl font-semibold">Masuk ke akun Anda</h2>
-        <p className="mt-2 text-sm text-white/60">Gunakan akun Google. Kami tidak menyimpan kata sandi Google Anda.</p>
-        <div className="mt-8 flex justify-center">
-          <GoogleLogin onSuccess={onSuccess} onError={() => setError('Login Google dibatalkan atau gagal.')} theme="filled_black" shape="pill" size="large" text="signin_with" locale="id" />
-        </div>
-        {error && <p role="alert" className="mt-5 rounded-lg bg-rose-500/15 px-4 py-3 text-sm text-rose-200">{error}</p>}
-        <p className="mt-8 text-xs leading-relaxed text-white/45">
-          FemCare membantu Anda mencatat dan memahami pola. Aplikasi ini bukan alat diagnosis dan tidak menggantikan pemeriksaan dokter.
-        </p>
-      </section>
+      <div className="flex flex-col items-center gap-6">
+        <Mascot mood="happy" size={170} message="Halo, aku Luna! Yuk masuk dan mulai mencatat." />
+
+        <section className="glass w-full rounded-3xl p-8 sm:p-10" aria-labelledby="login-title">
+          <h2 id="login-title" className="font-display text-2xl font-semibold">Masuk ke akun Anda</h2>
+          <p className="mt-2 text-sm text-white/60">Gunakan akun Google. Kami tidak menyimpan kata sandi Google Anda.</p>
+          <div className="mt-8 flex justify-center">
+            <GoogleLogin onSuccess={onSuccess} onError={() => setError('Login Google dibatalkan atau gagal.')} theme="filled_black" shape="pill" size="large" text="signin_with" locale="id" />
+          </div>
+          {error && <p role="alert" className="mt-5 rounded-lg bg-rose-500/15 px-4 py-3 text-sm text-rose-200">{error}</p>}
+          <p className="mt-8 text-xs leading-relaxed text-white/45">
+            FemCare membantu Anda mencatat dan memahami pola. Aplikasi ini bukan alat diagnosis dan tidak menggantikan pemeriksaan dokter.
+          </p>
+        </section>
+      </div>
     </div>
   );
 }

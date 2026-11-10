@@ -1,0 +1,45 @@
+.mc { display: inline-flex; flex-direction: column; align-items: center; gap: 14px; background: none; border: 0;
+  padding: 0; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.mc:focus-visible { outline: 2px solid #C4A6FF; outline-offset: 6px; border-radius: 16px; }
+
+/* ukuran menyesuaikan layar: tidak pernah lebih dari 58% lebar layar */
+.mc-svg { width: min(var(--mc-size, 160px), 58vw); height: auto; overflow: visible; transform-origin: 50% 100%; }
+
+.mc-bubble { position: relative; max-width: 16rem; padding: 0.6rem 0.95rem; border-radius: 1rem; font-size: 0.875rem;
+  line-height: 1.4; text-align: center; color: #fff; background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.mc-bubble::after { content: ''; position: absolute; left: 50%; bottom: -7px; width: 12px; height: 12px;
+  transform: translateX(-50%) rotate(45deg); background: rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.16); border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
+
+.mc-float { animation: mc-float 3.6s ease-in-out infinite alternate; }
+@keyframes mc-float { to { transform: translateY(-10px); } }
+
+.mc-shadow { transform-box: fill-box; transform-origin: center; animation: mc-shadow 3.6s ease-in-out infinite alternate; }
+@keyframes mc-shadow { to { transform: scaleX(0.82); opacity: 0.2; } }
+
+.mc-sway { transform-box: view-box; transform-origin: 100px 46px; animation: mc-sway 4.2s ease-in-out infinite alternate; }
+@keyframes mc-sway { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+
+.mc-wave { transform-box: view-box; transform-origin: 160px 124px; animation: mc-wave 6s ease-in-out infinite; }
+@keyframes mc-wave {
+  0%, 55%, 100% { transform: rotate(0); }
+  63% { transform: rotate(-28deg); } 71% { transform: rotate(10deg); }
+  79% { transform: rotate(-28deg); } 87% { transform: rotate(0); }
+}
+
+.mc-blink { transform-box: fill-box; transform-origin: center; animation: mc-blink 4.8s infinite; }
+@keyframes mc-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.08); } }
+
+.mc-spark { transform-box: fill-box; transform-origin: center; animation: mc-twinkle 2.8s ease-in-out infinite; }
+@keyframes mc-twinkle { 0%, 100% { transform: scale(0.3); opacity: 0.2; } 50% { transform: scale(1); opacity: 1; } }
+
+.mc-tear { animation: mc-tear 2.6s ease-in infinite; }
+@keyframes mc-tear { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(14px); opacity: 0; } }
+
+.mc-bump { animation: mc-bump 0.6s cubic-bezier(0.3, 1.6, 0.5, 1); }
+@keyframes mc-bump {
+  30% { transform: translateY(-18px) scale(1.06, 0.94); }
+  60% { transform: translateY(0) scale(0.96, 1.04); }
+}
+/* "Kurangi gerakan" ditangani aturan global di index.css */

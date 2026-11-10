@@ -6,6 +6,7 @@ import DailyLogger from '../components/DailyLogger.jsx';
 import SymptomHeatmap from '../components/SymptomHeatmap.jsx';
 import TrendChart from '../components/TrendChart.jsx';
 import SmartAlertBanner from '../components/SmartAlertBanner.jsx';
+import Mascot from '../components/Mascot.jsx';
 import { addDays, diffDays, isoOf, todayISO } from '../utils/dates.js';
 import { avg, round1 } from '../utils/analytics.js';
 
@@ -60,14 +61,25 @@ export default function Dashboard() {
     };
   }, [logs, cycle]);
 
+  // Ekspresi dan ucapan maskot mengikuti kondisi data pengguna.
+  const mascot = useMemo(() => {
+    if (alert?.triggered) return { mood: 'concerned', text: 'Aku khawatir. Yuk periksakan ke dokter ya.' };
+    if (stats.pain7 != null && stats.pain7 >= 7) return { mood: 'sad', text: 'Hari yang berat ya. Pelan-pelan saja, aku di sini.' };
+    if (!stats.loggedToday) return { mood: 'calm', text: 'Halo! Sudah catat hari ini?' };
+    return { mood: 'happy', text: 'Mantap, catatan hari ini sudah ada!' };
+  }, [alert, stats]);
+
   const firstName = user?.name?.split(' ')[0] ?? '';
 
   return (
     <>
       <SmartAlertBanner alert={alert} />
 
-      <section className="glass mb-6 flex flex-wrap items-center justify-between gap-6 rounded-3xl p-6 sm:p-8">
-        <div>
+      <section className="glass mb-6 grid items-center gap-6 rounded-3xl p-6 sm:p-8 md:grid-cols-[auto_1fr_auto]">
+        <div className="mx-auto md:mx-0">
+          <Mascot mood={mascot.mood} message={mascot.text} size={130} />
+        </div>
+        <div className="text-center md:text-left">
           <h1 className="font-display text-3xl font-semibold sm:text-4xl">Halo, {firstName}.</h1>
           <p className="mt-2 text-lg text-white/70">
             {stats.cycleDay
@@ -76,7 +88,7 @@ export default function Dashboard() {
           </p>
           <p className="mt-1 text-sm text-white/50">{stats.loggedToday ? 'Catatan hari ini sudah ada. Anda bisa mengubahnya kapan saja.' : 'Catatan hari ini belum diisi.'}</p>
         </div>
-        <button onClick={() => setOpen(true)} className="bg-sunset-gradient flex items-center gap-2 rounded-xl px-5 py-3.5 font-semibold text-white shadow-lg shadow-fuchsia-900/30">
+        <button onClick={() => setOpen(true)} className="bg-sunset-gradient flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 font-semibold text-white shadow-lg shadow-fuchsia-900/30">
           <PencilLine size={18} aria-hidden /> {stats.loggedToday ? 'Ubah catatan hari ini' : 'Catat hari ini'}
         </button>
       </section>
