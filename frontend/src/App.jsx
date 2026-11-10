@@ -1,6 +1,7 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { useAuth } from './context/AuthContext.jsx';
 import Layout from './components/Layout.jsx';
+import AnimatedBackground from './components/AnimatedBackground.jsx';
 import Login from './pages/Login.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import MedicalReport from './pages/MedicalReport.jsx';
@@ -14,7 +15,6 @@ function Splash() {
   );
 }
 
-/** Rute privat: arahkan ke /login bila belum ada sesi. */
 function ProtectedRoute() {
   const { user, loading } = useAuth();
   if (loading) return <Splash />;
@@ -34,14 +34,17 @@ function PublicOnlyRoute({ children }) {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
-      <Route element={<ProtectedRoute />}>
-        <Route index element={<Dashboard />} />
-        <Route path="report" element={<MedicalReport />} />
-        <Route path="library" element={<HealthLibrary />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <AnimatedBackground />
+      <Routes>
+        <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
+        <Route element={<ProtectedRoute />}>
+          <Route index element={<Dashboard />} />
+          <Route path="report" element={<MedicalReport />} />
+          <Route path="library" element={<HealthLibrary />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 }
